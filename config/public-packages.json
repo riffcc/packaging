@@ -4,7 +4,7 @@
   "distribution": "trixie",
   "architectures": ["amd64"],
   "packages": [
-    {"name": "rifflabs-rolodex", "project": "Rolodex", "repo": "riffcc/codex", "status": "planned"},
+    {"name": "rolodex", "project": "Rolodex", "repo": "riffcc/codex", "status": "planned"},
     {"name": "rifflabs-palace", "project": "Palace", "repo": "riffcc/palace", "status": "planned"},
     {"name": "rifflabs-skills-updater", "project": "Skills", "repo": "riffcc/skills", "status": "released"},
     {"name": "rifflabs-skill-riff-labs", "project": "Skills", "repo": "riffcc/skills", "status": "released"},
