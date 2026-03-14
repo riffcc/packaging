@@ -1,0 +1,39 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+      - '**'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Render site from catalogs
+        run: ./scripts/render-site.py
+
+      - name: Build Debian metadata
+        run: ./scripts/build-release-metadata.py
+
+      - name: Check committed renderables stay in sync
+        run: git diff --exit-code -- public/index.html
+
+      - name: Upload generated repo metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: packaging-site-preview
+          path: |
+            public/index.html
+            public/catalog.json
+            public/debian/dists/trixie/Release
+            public/debian/dists/trixie/main/binary-amd64/Packages
+            public/debian/dists/trixie/main/binary-amd64/Packages.gz

@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "channel": "allowlisted",
+  "policy": {
+    "access": "ip-allowlist",
+    "note": "Package metadata may be described publicly, but artifact access is limited to approved source IPs or equivalent edge controls."
+  },
+  "packages": [
+    {"name": "rifflabs-ipfs-ha", "project": "IPFS HA", "status": "planned"},
+    {"name": "rifflabs-kubo-ha", "project": "IPFS HA", "status": "planned"},
+    {"name": "rifflabs-ipfs-cluster-ha", "project": "IPFS HA", "status": "planned"}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "channel": "public",
+  "distribution": "trixie",
+  "architectures": ["amd64"],
+  "packages": [
+    {"name": "rifflabs-rolodex", "project": "Rolodex", "repo": "riffcc/codex", "status": "planned"},
+    {"name": "rifflabs-palace", "project": "Palace", "repo": "riffcc/palace", "status": "planned"},
+    {"name": "rifflabs-skills-updater", "project": "Skills", "repo": "riffcc/skills", "status": "released"},
+    {"name": "rifflabs-skill-riff-labs", "project": "Skills", "repo": "riffcc/skills", "status": "released"},
+    {"name": "rifflabs-dragonfly", "project": "Dragonfly", "repo": "riffcc/dragonfly", "status": "planned"},
+    {"name": "rifflabs-jetpack", "project": "Jetpack", "repo": "riffcc/jetpack", "status": "planned"},
+    {"name": "rifflabs-citadel", "project": "Citadel", "repo": "riffcc/citadel", "status": "planned"},
+    {"name": "rifflabs-flagship", "project": "Flagship", "repo": "riffcc/flagship", "status": "planned"}
+  ]
+}

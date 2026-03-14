@@ -1,0 +1,5 @@
+public/catalog.json
+public/debian/dists/trixie/Release
+public/debian/dists/trixie/InRelease
+public/debian/dists/trixie/main/binary-amd64/Packages
+public/debian/dists/trixie/main/binary-amd64/Packages.gz

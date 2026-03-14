@@ -1,0 +1,57 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Render site from catalogs
+        run: ./scripts/render-site.py
+
+      - name: Build Debian metadata
+        run: ./scripts/build-release-metadata.py
+
+      - name: Upload deploy bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: repos-riff-cc-site
+          path: |
+            public
+            Caddyfile
+            Dockerfile
+            fly.toml
+
+  deploy-fly:
+    needs: build-site
+    if: ${{ secrets.FLY_API_TOKEN != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Render site from catalogs
+        run: ./scripts/render-site.py
+
+      - name: Build Debian metadata
+        run: ./scripts/build-release-metadata.py
+
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy to Fly.io
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: flyctl deploy --remote-only
