@@ -17,7 +17,11 @@
       <section class="panel">
         <h2>Public Debian Repository</h2>
         <p>Current distribution target: Debian 13 <code>amd64</code>.</p>
-        <pre><code>deb [arch=amd64] https://repos.riff.cc/debian trixie main</code></pre>
+        <pre><code># Add the signing key
+curl -fsSL https://repos.riff.cc/key.asc | sudo gpg --dearmor -o /usr/share/keyrings/rifflabs.gpg
+
+# Add the repository
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/rifflabs.gpg] https://repos.riff.cc/debian trixie main" | sudo tee /etc/apt/sources.list.d/rifflabs.list</code></pre>
       </section>
 
       <section class="panel">

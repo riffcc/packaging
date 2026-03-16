@@ -76,7 +76,11 @@ def render_index(public_catalog: dict, allowlisted_catalog: dict) -> str:
       <section class=\"panel\">
         <h2>Public Debian Repository</h2>
         <p>Current distribution target: Debian 13 <code>{escape(public_arches)}</code>.</p>
-        <pre><code>deb [arch={escape(public_arches)}] https://repos.riff.cc/debian {escape(dist)} main</code></pre>
+        <pre><code># Add the signing key
+curl -fsSL https://repos.riff.cc/key.asc | sudo gpg --dearmor -o /usr/share/keyrings/rifflabs.gpg
+
+# Add the repository
+echo "deb [arch={escape(public_arches)} signed-by=/usr/share/keyrings/rifflabs.gpg] https://repos.riff.cc/debian {escape(dist)} main" | sudo tee /etc/apt/sources.list.d/rifflabs.list</code></pre>
       </section>
 
       <section class=\"panel\">

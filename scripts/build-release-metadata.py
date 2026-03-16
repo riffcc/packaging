@@ -2,6 +2,7 @@
 import datetime as dt
 import gzip
 import hashlib
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -79,9 +80,47 @@ def write_release() -> None:
     RELEASE.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+RELEASE_GPG = DIST / "Release.gpg"
+INRELEASE = DIST / "InRelease"
+
+
+def sign_release() -> None:
+    gpg_key = os.environ.get("GPG_SIGNING_KEY")
+    if not gpg_key:
+        print("GPG_SIGNING_KEY not set, skipping signing")
+        return
+
+    subprocess.run(
+        ["gpg", "--batch", "--import"],
+        input=gpg_key,
+        text=True,
+        check=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+    key_id = os.environ.get("GPG_KEY_ID", "")
+    key_args = ["--default-key", key_id] if key_id else []
+
+    subprocess.run(
+        ["gpg", "--batch", "--yes", "--armor", "--detach-sign", *key_args,
+         "--output", str(RELEASE_GPG), str(RELEASE)],
+        check=True,
+    )
+
+    subprocess.run(
+        ["gpg", "--batch", "--yes", "--armor", "--clearsign", *key_args,
+         "--output", str(INRELEASE), str(RELEASE)],
+        check=True,
+    )
+
+    print(f"Signed: {RELEASE_GPG.name}, {INRELEASE.name}")
+
+
 def main() -> None:
     write_packages()
     write_release()
+    sign_release()
 
 
 if __name__ == "__main__":

@@ -28,7 +28,10 @@ jobs:
       - name: Render site from catalogs
         run: ./scripts/render-site.py
 
-      - name: Build Debian metadata
+      - name: Build and sign Debian metadata
+        env:
+          GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
+          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
         run: ./scripts/build-release-metadata.py
 
       - name: Upload Pages artifact
