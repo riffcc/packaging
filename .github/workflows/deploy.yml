@@ -25,6 +25,11 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Fetch .deb artifacts from GitHub releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./scripts/fetch-debs.py
+
       - name: Render site from catalogs
         run: ./scripts/render-site.py
 

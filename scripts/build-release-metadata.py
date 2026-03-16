@@ -34,13 +34,15 @@ def write_packages() -> None:
     if debs and not dpkg_scanpackages:
         raise SystemExit("found .deb files in pool/ but dpkg-scanpackages is not available")
 
+    debian_root = ROOT / "public" / "debian"
     if dpkg_scanpackages:
         proc = subprocess.run(
-            [dpkg_scanpackages, str(POOL), "/dev/null"],
+            [dpkg_scanpackages, "pool/main", "/dev/null"],
             check=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
+            cwd=str(debian_root),
         )
         content = proc.stdout
     else:
