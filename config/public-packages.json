@@ -20,7 +20,7 @@
     {"name": "rifflabs-skill-riff-onboarding", "project": "Skills", "repo": "riffcc/skills", "status": "released"},
     {"name": "rifflabs-skill-storage-systems", "project": "Skills", "repo": "riffcc/skills", "status": "released"},
     {"name": "rifflabs-dragonfly", "project": "Dragonfly", "repo": "riffcc/dragonfly", "status": "planned"},
-    {"name": "rifflabs-jetpack", "project": "Jetpack", "repo": "riffcc/jetpack", "status": "planned"},
+    {"name": "rifflabs-jetpack", "project": "Jetpack", "repo": "riffcc/jetpack", "status": "released"},
     {"name": "rifflabs-citadel", "project": "Citadel", "repo": "riffcc/citadel", "status": "planned"},
     {"name": "rifflabs-flagship", "project": "Flagship", "repo": "riffcc/flagship", "status": "planned"}
   ]
